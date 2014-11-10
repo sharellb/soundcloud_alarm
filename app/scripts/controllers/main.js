@@ -28,10 +28,11 @@ angular.module('alarmApp')
     	$scope.todos.splice(index, 1);
     };
 
+    var clientID = process.env.CLIENT_ID
     /* SOUNDCLOUD */
     $scope.init = function(){
         SC.initialize({
-            client_id: ENV["CLIENT_ID"]
+            client_id: clientID;
         });
     };
     
