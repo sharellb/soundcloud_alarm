@@ -31,7 +31,7 @@ angular.module('alarmApp')
     /* SOUNDCLOUD */
     $scope.init = function(){
         SC.initialize({
-            client_id: 'CLIENT_ID'
+            client_id: ENV['CLIENT_ID']
         });
     };
     
