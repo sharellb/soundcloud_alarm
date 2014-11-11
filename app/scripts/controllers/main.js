@@ -55,7 +55,7 @@ angular.module('alarmApp')
         }
     };
 
-    $scope.trackSearch = 'Search';
+    $scope.trackSearch = '';
     $scope.tracks = [];
     var page_size = 10;
     
@@ -74,13 +74,16 @@ angular.module('alarmApp')
 
     /* CLOCK */
     $scope.timeOfDay = '';
-    $scope.alarm = '12:00 PM';
+    $scope.hours = '12';
+    $scope.minutes = '00';
+    $scope.daytime = 'AM';
     $scope.clock = {
         clock : new Date()
     };
 
     var checkDay = function () {
         $scope.dayTime = $filter('date')(new Date(), 'a');
+        $scope.alarm = $scope.hours + ':' + $scope.minutes + ' ' + $scope.daytime;
         if ($scope.dayTime === 'PM') {
             $scope.timeOfDay = 'How is your day?';
         } else {

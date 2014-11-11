@@ -3,10 +3,21 @@
   <div class="clock">
     
   <p class="lead">
-    {{timeOfDay}}
+    Your alarm is set for {{ alarm }}
   </p>
     {{ clock.now }}</br>
-        <p>Wake me up at <input type="text" ng-model="alarm" placeholder="12:00 AM" class="form-control"></p>
+        <p>Wake me up at 
+          <div class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" ng-model="hours" class="form-control">:
+              <input type="text" ng-model="minutes" class="form-control">
+              <select ng-model="daytime">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
+          </div>
+        </p>
   </div>
 </div>
 
