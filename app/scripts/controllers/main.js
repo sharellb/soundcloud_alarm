@@ -10,7 +10,7 @@
 
  
 angular.module('alarmApp')
-  .controller('MainCtrl', function ($scope, $filter,localStorageService) {
+  .controller('MainCtrl', function ($scope, $filter, localStorageService, $http) {
     
 
     /* TO DO*/
@@ -31,7 +31,7 @@ angular.module('alarmApp')
     /* SOUNDCLOUD */
     $scope.init = function(){
         SC.initialize({
-            client_id: "b43e6bc869d777711c84bc8f10ffefc5"
+            client_id: 'b43e6bc869d777711c84bc8f10ffefc5'
         });
     };
     
@@ -101,5 +101,35 @@ angular.module('alarmApp')
         $scope.$apply(checkDay);
     }, 1000);
 
-        
+    /* LOCATION */
+    $scope.getLocation = function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            $scope.locationMessage = 'Geolocation is not supported by this browser';
+        }
+    };
+
+    var showPosition = function(position) {
+        $scope.latitude = position.coords.latitude;
+        $scope.longitude = position.coords.longitude;
+        var weatherurl = 'http://api.wunderground.com/api/92307d247d2b16a0/geolookup/conditions/q/' + $scope.latitude + ',' + $scope.longitude + '.json?callback=JSON_CALLBACK';
+        getCity(weatherurl);
+    };
+
+    var getCity = function(weatherurl) {
+        console.log('getting the city');
+        $http.jsonp(weatherurl).
+        success(function(data) {
+            // this callback will be called asynchronously
+            // when the response is available
+            $scope.city = data.location.city;
+        });
+    };    
+
+    var locationInStore = localStorageService.get('city');
+        $scope.city = locationInStore;
+        $scope.$watch('city', function () {
+            localStorageService.set('city', $scope.city);
+    }, true);
   });
