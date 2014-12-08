@@ -21,7 +21,7 @@
   </div>
 </div>
 
-<div class="col-sm-5 well">
+<div class="well">
   <h3>To Do</h3>
   <div  ui-sortable ng-model="todos">
     <p class="input-group" ng-repeat="todo in todos" style="padding:5px 10px; cursor: move;">
@@ -45,7 +45,7 @@
   <p></p>
 </div>
 
-<div class="col-sm-5 well" data-ng-init="init()">
+<div class="well" data-ng-init="init()">
   <h3>Pick a song for your alarm</h3>
   <form role="form" ng-submit="search()">
     <div class="row">
@@ -67,7 +67,7 @@
   </br>
 </div>
 
-<div class="col-sm-5 well">
+<div class="well">
   <h3>Weather and News</h3>
   <button class="btn btn-primary" ng-click="getLocation()">Set Current Location</button>
     <p>{{ city }}</p>
